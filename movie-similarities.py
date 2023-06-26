@@ -45,7 +45,7 @@ sc = SparkContext(conf = conf)
 print("\nLoading movie names...")
 nameDict = loadMovieNames()
 
-data = sc.textFile("file:///SparkCourse/ml-100k/u.data")
+data = sc.textFile("file:///GitHub/Frank-Kanes-Taming-Big-Data-with-Apache-Spark-and-Python/ml-100k/u.data")
 
 # Map ratings to key / value pairs: user ID => movie ID, rating
 ratings = data.map(lambda l: l.split()).map(lambda l: (int(l[0]), (int(l[1]), float(l[2]))))
