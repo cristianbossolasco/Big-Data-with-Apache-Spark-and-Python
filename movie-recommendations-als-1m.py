@@ -17,7 +17,7 @@ sc.setCheckpointDir('checkpoint')
 print("\nLoading movie names...")
 nameDict = loadMovieNames()
 
-data = sc.textFile("file:///E:/SparkCourse/ml-1m/ratings.dat")
+data = sc.textFile("file:///GitHub/Frank-Kanes-Taming-Big-Data-with-Apache-Spark-and-Python/ml-1m/ratings.dat")
 
 ratings = data.map(lambda l: l.split("::")).map(lambda l: Rating(int(l[0]), int(l[1]), float(l[2]))).cache()
 

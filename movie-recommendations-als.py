@@ -17,7 +17,7 @@ sc.setCheckpointDir('checkpoint')
 print("\nLoading movie names...")
 nameDict = loadMovieNames()
 
-data = sc.textFile("file:///SparkCourse/ml-100k/u.data")
+data = sc.textFile("file:///GitHub/Frank-Kanes-Taming-Big-Data-with-Apache-Spark-and-Python/ml-100k/u.data")
 
 ratings = data.map(lambda l: l.split()).map(lambda l: Rating(int(l[0]), int(l[1]), float(l[2]))).cache()
 
@@ -33,10 +33,10 @@ userID = int(sys.argv[1])
 print("\nRatings for user ID " + str(userID) + ":")
 userRatings = ratings.filter(lambda l: l[0] == userID)
 for rating in userRatings.collect():
-    print nameDict[int(rating[1])] + ": " + str(rating[2])
+    print (nameDict[int(rating[1])] + ": " + str(rating[2]))
 
 print("\nTop 10 recommendations:")
 recommendations = model.recommendProducts(userID, 10)
 for recommendation in recommendations:
-    print nameDict[int(recommendation[1])] + \
-        " score " + str(recommendation[2])
+    print (nameDict[int(recommendation[1])] + \
+        " score " + str(recommendation[2]))

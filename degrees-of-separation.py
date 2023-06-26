@@ -6,7 +6,7 @@ sc = SparkContext(conf = conf)
 
 # The characters we wish to find the degree of separation between:
 startCharacterID = 5306 #SpiderMan
-targetCharacterID = 14  #ADAM 3,031 (who?)
+targetCharacterID =  250  #ADAM 3,031 (who?)
 
 # Our accumulator, used to signal when we find the target character during
 # our BFS traversal.
@@ -30,7 +30,7 @@ def convertToBFS(line):
 
 
 def createStartingRdd():
-    inputFile = sc.textFile("file:///sparkcourse/marvel-graph.txt")
+    inputFile = sc.textFile("file:///GitHub/Frank-Kanes-Taming-Big-Data-with-Apache-Spark-and-Python/marvel-graph.txt")
     return inputFile.map(convertToBFS)
 
 def bfsMap(node):
