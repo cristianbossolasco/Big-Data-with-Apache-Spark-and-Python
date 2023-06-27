@@ -17,10 +17,10 @@ lines = sc.textFile("file:///SparkCourse/ml-100k/u.data")
 movies = lines.map(lambda x: (int(x.split()[1]), 1))
 movieCounts = movies.reduceByKey(lambda x, y: x + y)
 
-flipped = movieCounts.map( lambda (x, y) : (y, x))
+flipped = movieCounts.map( lambda xy : (xy[1], xy[0]))
 sortedMovies = flipped.sortByKey()
 
-sortedMoviesWithNames = sortedMovies.map(lambda (count, movie) : (nameDict.value[movie], count))
+sortedMoviesWithNames = sortedMovies.map(lambda countMovie : (nameDict.value[countMovie[1]], countMovie[0]))
 
 results = sortedMoviesWithNames.collect()
 
