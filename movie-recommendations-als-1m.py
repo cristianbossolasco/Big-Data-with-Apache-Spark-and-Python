@@ -7,7 +7,7 @@ def loadMovieNames():
     with open("ml-1m/movies.dat") as f:
         for line in f:
             fields = line.split('::')
-            movieNames[int(fields[0])] = fields[1].decode('ascii', 'ignore')
+            movieNames[int(fields[0])] = fields[1]
     return movieNames
 
 conf = SparkConf().setMaster("local[*]").setAppName("MovieRecommendationsALS")

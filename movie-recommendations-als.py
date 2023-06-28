@@ -7,12 +7,16 @@ def loadMovieNames():
     with open("ml-100k/u.ITEM") as f:
         for line in f:
             fields = line.split('|')
-            movieNames[int(fields[0])] = fields[1].decode('ascii', 'ignore')
+            movieNames[int(fields[0])] = fields[1]
     return movieNames
 
+
 conf = SparkConf().setMaster("local[*]").setAppName("MovieRecommendationsALS")
-sc = SparkContext(conf = conf)
+conf.set("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem")
+conf.set("spark.executorEnv.PYTHONHASHSEED", "0")
+sc = SparkContext(conf=conf)
 sc.setCheckpointDir('checkpoint')
+
 
 print("\nLoading movie names...")
 nameDict = loadMovieNames()
